@@ -1,0 +1,30 @@
+#!/bin/bash
+
+CMD=`basename $0`
+ACTION=$1
+shift 1
+ARGS=$@
+
+# from https://stackoverflow.com/questions/1527049/join-elements-of-an-array
+function join_by { local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}"; }
+
+
+TERMS=`join_by '\|' $ARGS`
+
+case $ACTION in
+"usage")
+  echo "  hide [TERM...]"
+  echo "    Hide tasks containing ANY of the listed TERM(s):"
+  echo "    $TODO_SH $CMD +foo bar"
+  echo ""
+  ;;
+*)
+  if [[ -z $TERMS ]]; then
+    "$TODO_FULL_SH" list
+  else
+    GREP_CMD="grep -iv $TERMS"
+    "$TODO_FULL_SH" list | $GREP_CMD
+  fi
+  ;;
+esac
+
