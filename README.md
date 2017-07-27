@@ -28,6 +28,8 @@ The directory structure should look like this now:
 
 ## Usage
 
-Hide tasks containing *ANY* of the listed terms:
+Hide tasks that contain *ANY* of the listed terms:
 
-    todo.sh hide +foo bar
+    todo.sh hide +foo @bar baz
+    
+Terms are case-insensitive (i.e. *foo* will also match *FOO*).
