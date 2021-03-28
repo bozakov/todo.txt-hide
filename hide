@@ -20,5 +20,5 @@ if [ -z "$ARGS" ]; then
 	exit
 fi
 
-TERMS=$(echo "$ARGS" | sed 's/ \+/\\\|/')
-"$TODO_FULL_SH" list | grep -iv "$TERMS"
+TERMS=$(echo "$ARGS" | sed 's/ \+/ -/')
+"$TODO_FULL_SH" list -$TERMS
